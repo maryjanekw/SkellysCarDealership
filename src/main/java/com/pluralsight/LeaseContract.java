@@ -9,7 +9,7 @@ public class LeaseContract extends Contract{
     private final double interestRate = 0.04; // annual 4%
     private final int leaseTermMonths = 36;
 
-    // constuctor
+    // constructor
     public LeaseContract(String contractDate, String customerName, String customerEmail, Vehicle vehicleSold,
                          double expectedEndingValue, double leaseFee) {
         super(contractDate, customerName, customerEmail, vehicleSold);
