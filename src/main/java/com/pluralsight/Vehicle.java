@@ -79,6 +79,10 @@ public class Vehicle {
         this.price = price;
     }
 
+    public Vehicle findVehicleByVin(int vin) {
+        return null;
+    }
+
     @Override
     public String toString() {
         return year + " " + make + " " + model + " | " + color + " | " + odometer + " miles" + " | $" + price +

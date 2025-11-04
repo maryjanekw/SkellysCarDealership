@@ -32,6 +32,12 @@ public class LeaseContract extends Contract{
         return (totalPrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, leaseTermMonths));
     }
 
+    // contact type
+    @Override
+    public String getContractType(){
+        return "Lease";
+    }
+
     // getters and setters
 
     public double getExpectedEndingValue() {

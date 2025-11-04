@@ -45,6 +45,12 @@ public class SalesContract extends Contract{
         return (totalPrice * monthlyRate) / (1 - Math.pow(1 + monthlyRate, months));
     }
 
+    // Contract type
+    @Override
+    public String getContractType(){
+        return "Sales";
+    }
+
     // getters and setters
     public double getSalesTaxAmount() {
         return salesTaxAmount;

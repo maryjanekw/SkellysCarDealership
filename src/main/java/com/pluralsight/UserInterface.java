@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.util.Scanner;
 import java.util.List;
 
+
 public class UserInterface {
 
     private Dealership dealership;
@@ -24,6 +25,7 @@ public class UserInterface {
         System.out.println("7 - List ALL vehicles");
         System.out.println("8 - Add a vehicle");
         System.out.println("9 - Remove a vehicle");
+        System.out.println("10 - Create a Contract");
         System.out.println("99 - Quit");
         System.out.println("========================================");
     }
@@ -67,6 +69,9 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
+                case "10":
+                    processNewContract();
+                    break;
                 case "99":
                     System.out.println("Exiting program... Goodbye!");
                     running = false;
@@ -96,7 +101,7 @@ public class UserInterface {
             return;
         }
 
-        System.out.println("\n------ VEHICLE INVENTORY ------");
+        System.out.println("\n----------------------- VEHICLE INVENTORY -----------------------");
         for (Vehicle v : vehicles) {
             System.out.println(
                     v.getYear() + " " + v.getMake() + " " + v.getModel() +
@@ -105,7 +110,7 @@ public class UserInterface {
                             " | $" + v.getPrice() +
                             " | Type: " + v.getVehicleType());
         }
-        System.out.println("------------------------------\n");
+        System.out.println("-----------------------------------------------------------------\n");
     }
 
     // Process all Vehicle Requests
@@ -115,11 +120,11 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner read = new Scanner(System.in);
         System.out.print("Enter minimum price: ");
-        double min = Double.parseDouble(scanner.nextLine());
+        double min = Double.parseDouble(read.nextLine());
         System.out.print("Enter maximum price: ");
-        double max = Double.parseDouble(scanner.nextLine());
+        double max = Double.parseDouble(read.nextLine());
 
         List<Vehicle> results = dealership.getVehiclesByPrice(min, max);
         displayVehicles(results);
@@ -157,6 +162,7 @@ public class UserInterface {
 
         Vehicle newVehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         dealership.addVehicle(newVehicle);
+        System.out.println(newVehicle);
 
         // Save changes
         DealershipFileManager dealershipFileManager = new DealershipFileManager();
@@ -165,9 +171,9 @@ public class UserInterface {
     }
 
     public void processRemoveVehicleRequest() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner read = new Scanner(System.in);
         System.out.println("Enter VIN of vehicle to remove: ");
-        String vin = scanner.nextLine();
+        String vin = read.nextLine();
 
         Vehicle toRemove = null;
         for (Vehicle v : dealership.getAllVehicles()) {
@@ -186,5 +192,48 @@ public class UserInterface {
             System.out.println("Vehicle not found.");
         }
     }
+
+    public void processNewContract(){
+        Scanner read = new Scanner(System.in);
+
+        System.out.println("Enter VIN: ");
+        int vin = read.nextInt();
+
+        Vehicle vehicle = findVehicleByVin(String.valueOf(vin));
+        if (vehicle == null) {
+            System.out.println("Vehicle not found!");
+            return;
+        }
+
+        System.out.println("Enter Contract type (Sales/Lease): ");
+        String contractType = read.nextLine();
+        System.out.println("Enter Customer Name: ");
+        String customerName = read.nextLine();
+        System.out.println("Enter Customer Email: ");
+        String customerEmail = read.nextLine();
+
+        if (contractType.equalsIgnoreCase("sale")){
+            System.out.println("Will this car be Financed? (yes/no): ");
+            String isFinanced = read.nextLine();
+            double salesTaxAmount;
+            double recordingFee;
+            double processingFee;
+            double totalPrice = vehicle.getPrice();
+            double monthlyPayments;
+
+        }
+    }
+
+
+    // helper methods
+    public Vehicle findVehicleByVin(String vin) {
+        Vehicle[] inventory = new Vehicle[0];
+        for (Vehicle v : inventory)
+            if (v.getVin().equalsIgnoreCase(vin)) {
+                return v;
+            }
+        return null;
+    }
+
 
 }

@@ -1,9 +1,13 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
+
 public abstract class Contract {
+
 
     // variables
     private String contractDate;
+    private String LocalDate = contractDate;
     private String customerName;
     private String customerEmail;
     private Vehicle vehicleSold;
@@ -55,4 +59,6 @@ public abstract class Contract {
     public abstract double getTotalPrice();
 
     public abstract double getMonthlyPayments();
+
+    public abstract String getContractType();
 }
