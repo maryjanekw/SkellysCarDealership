@@ -212,6 +212,7 @@ public class UserInterface {
         System.out.println("Enter Customer Email: ");
         String customerEmail = read.nextLine();
 
+        // sale contract
         if (contractType.equalsIgnoreCase("sale")){
             System.out.println("Will this car be Financed? (yes/no): ");
             String isFinanced = read.nextLine();
@@ -220,7 +221,6 @@ public class UserInterface {
             double processingFee;
             double totalPrice = vehicle.getPrice();
             double monthlyPayments;
-
         }
     }
 
